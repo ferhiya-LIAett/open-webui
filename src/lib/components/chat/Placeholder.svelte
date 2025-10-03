@@ -1,3 +1,4 @@
+
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
 	import { marked } from 'marked';
@@ -70,6 +71,7 @@
 	onMount(() => {});
 </script>
 
+
 <div class="m-auto w-full max-w-6xl px-2 @2xl:px-20 translate-y-6 py-24 text-center">
 	{#if $temporaryChatEnabled}
 		<Tooltip
@@ -105,58 +107,16 @@
 				/>
 			{:else}
 				<div class="flex flex-row justify-center gap-3 @sm:gap-3.5 w-fit px-5 max-w-xl">
-					<div class="flex shrink-0 justify-center">
-						<div class="flex -space-x-4 mb-0.5" in:fade={{ duration: 100 }}>
-							{#each models as model, modelIdx}
-								<Tooltip
-									content={(models[modelIdx]?.info?.meta?.tags ?? [])
-										.map((tag) => tag.name.toUpperCase())
-										.join(', ')}
-									placement="top"
-								>
-									<button
-										aria-hidden={models.length <= 1}
-										aria-label={$i18n.t('Get information on {{name}} in the UI', {
-											name: models[modelIdx]?.name
-										})}
-										on:click={() => {
-											selectedModelIdx = modelIdx;
-										}}
-									>
-										<img
-											crossorigin="anonymous"
-											src={model?.info?.meta?.profile_image_url ??
-												($i18n.language === 'dg-DG'
-													? `${WEBUI_BASE_URL}/doge.png`
-													: `${WEBUI_BASE_URL}/static/favicon.png`)}
-											class=" size-9 @sm:size-10 rounded-full border-[1px] border-gray-100 dark:border-none"
-											aria-hidden="true"
-											draggable="false"
-										/>
-									</button>
-								</Tooltip>
-							{/each}
+						<div
+							class=" text-3xl @sm:text-3xl line-clamp-1 flex items-center"
+							in:fade={{ duration: 100 }}
+						>
+							<span>
+								
+								{$i18n.t('How can I help you today, {{name}}', { name: $user?.name })}
+							</span>
 						</div>
-					</div>
 
-					<div
-						class=" text-3xl @sm:text-3xl line-clamp-1 flex items-center"
-						in:fade={{ duration: 100 }}
-					>
-						{#if models[selectedModelIdx]?.name}
-							<Tooltip
-								content={models[selectedModelIdx]?.name}
-								placement="top"
-								className=" flex items-center "
-							>
-								<span class="line-clamp-1">
-									{models[selectedModelIdx]?.name}
-								</span>
-							</Tooltip>
-						{:else}
-							{$i18n.t('Hello, {{name}}', { name: $user?.name })}
-						{/if}
-					</div>
 				</div>
 
 				<div class="flex mt-1 mb-2">
@@ -221,7 +181,7 @@
 					{toolServers}
 					{stopResponse}
 					{createMessagePair}
-					placeholder={$i18n.t('How can I help you today?')}
+					placeholder={$i18n.t('Enter a prompt here')}
 					{onChange}
 					on:upload={(e) => {
 						dispatch('upload', e.detail);

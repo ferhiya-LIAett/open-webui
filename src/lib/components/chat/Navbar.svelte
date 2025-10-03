@@ -73,29 +73,34 @@
 <nav class="sticky top-0 z-30 w-full py-1 -mb-8 flex flex-col items-center drag-region">
 	<div class="flex items-center w-full pl-1.5 pr-1">
 		<div
-			class=" bg-linear-to-b via-40% to-97% from-white via-white to-transparent dark:from-gray-900 dark:via-gray-900 dark:to-transparent pointer-events-none absolute inset-0 -bottom-7 z-[-1]"
+			class="absolute inset-0 z-[-1] bg-[#F2F2F2] dark:bg-gray-950 pointer-events-none"
 		></div>
+
 
 		<div class=" flex max-w-full w-full mx-auto px-1.5 md:px-2 pt-0.5 bg-transparent">
 			<div class="flex items-center w-full max-w-full">
-				{#if $mobile && !$showSidebar}
+				
 					<div
 						class="-translate-x-0.5 mr-1 mt-1 self-start flex flex-none items-center text-gray-600 dark:text-gray-400"
 					>
+				
 						<Tooltip content={$showSidebar ? $i18n.t('Close Sidebar') : $i18n.t('Open Sidebar')}>
-							<button
-								class=" cursor-pointer flex rounded-lg hover:bg-gray-100 dark:hover:bg-gray-850 transition"
-								on:click={() => {
-									showSidebar.set(!$showSidebar);
-								}}
-							>
-								<div class=" self-center p-1.5">
-									<Sidebar />
-								</div>
-							</button>
+									<button
+										class="flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-850 transition px-3 py-2"
+										on:click={() => showSidebar.set(!$showSidebar)}
+										aria-label={$showSidebar ? $i18n.t('Close Sidebar') : $i18n.t('Open Sidebar')}
+									>
+										{#if $showSidebar}
+											<span class="text-black text-xl font-bold">{'<'}</span>
+											<span class="text-gray-400 text-xl font-bold">{'<'}</span>
+										{:else}
+											<span class="text-gray-400 text-xl font-bold">{'>'}</span>
+											<span class="text-black text-xl font-bold">{'>'}</span>
+										{/if}
+									</button>
 						</Tooltip>
 					</div>
-				{/if}
+				
 
 				<div
 					class="flex-1 overflow-hidden max-w-full py-0.5

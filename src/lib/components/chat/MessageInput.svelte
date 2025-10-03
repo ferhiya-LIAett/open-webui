@@ -1064,7 +1064,7 @@
 														?.profile_image_url ??
 														($i18n.language === 'dg-DG'
 															? `${WEBUI_BASE_URL}/doge.png`
-															: `${WEBUI_BASE_URL}/static/favicon.png`)}
+															: `${WEBUI_BASE_URL}/static/splash.png`)}
 												/>
 												<div class="translate-y-[0.5px]">
 													<span class="">{atSelectedModel.name}</span>
@@ -1448,6 +1448,67 @@
 												<PlusAlt className="size-5.5" />
 											</div>
 										</InputMenu>
+ 								<!-- My edits -->
+										   <!-- File Upload -->
+										<Tooltip content="Upload Files">
+											<button
+												class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-850 transition outline-none focus:outline-none"
+												on:click={() => filesInputElement.click()}
+												aria-label="Upload Files"
+												type="button"
+											>
+												<!-- Paperclip SVG -->
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke-width="1.5"
+													stroke="currentColor"
+													class="w-5 h-5"
+												>
+													<path
+														d="M21.4383 11.6622L12.2483 20.8522C11.1225 21.9781 9.59552 22.6106 8.00334 22.6106C6.41115 22.6106 4.88418 21.9781 3.75834 20.8522C2.63249 19.7264 2 18.1994 2 16.6072C2 15.015 2.63249 13.4881 3.75834 12.3622L12.9483 3.17222C13.6989 2.42166 14.7169 2 15.7783 2C16.8398 2 17.8578 2.42166 18.6083 3.17222C19.3589 3.92279 19.7806 4.94077 19.7806 6.00222C19.7806 7.06368 19.3589 8.08166 18.6083 8.83222L9.40834 18.0222C9.03306 18.3975 8.52406 18.6083 7.99334 18.6083C7.46261 18.6083 6.95362 18.3975 6.57834 18.0222C6.20306 17.6469 5.99222 17.138 5.99222 16.6072C5.99222 16.0765 6.20306 15.5675 6.57834 15.1922L15.0683 6.71222"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													/>
+												</svg>
+											</button>
+										</Tooltip>
+
+															
+										<!-- Capture Screen / Webpage -->
+											<Tooltip content="Capture">
+												<button
+													class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-850 transition outline-none focus:outline-none"
+													on:click={screenCaptureHandler}
+													aria-label="Capture"
+													type="button"
+												>
+													<!-- Camera SVG -->
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														fill="none"
+														viewBox="0 0 24 24"
+														stroke-width="1.5"
+														stroke="currentColor"
+														class="w-5 h-5"
+													>
+														<path
+															d="M2 19V9C2 7.89543 2.89543 7 4 7H4.5C5.12951 7 5.72229 6.70361 6.1 6.2L8.32 3.24C8.43331 3.08892 8.61115 3 8.8 3H15.2C15.3889 3 15.5667 3.08892 15.68 3.24L17.9 6.2C18.2777 6.70361 18.8705 7 19.5 7H20C21.1046 7 22 7.89543 22 9V19C22 20.1046 21.1046 21 20 21H4C2.89543 21 2 20.1046 2 19Z"
+															stroke-linecap="round"
+															stroke-linejoin="round"
+														/>
+														<path
+															d="M12 17C14.2091 17 16 15.2091 16 13C16 10.7909 14.2091 9 12 9C9.79086 9 8 10.7909 8 13C8 15.2091 9.79086 17 12 17Z"
+															stroke-linecap="round"
+															stroke-linejoin="round"
+														/>
+													</svg>
+												</button>
+											</Tooltip>
+
+				
+
 
 										<div
 											class="flex self-center w-[1px] h-4 mx-1 bg-gray-200/50 dark:bg-gray-800/50"

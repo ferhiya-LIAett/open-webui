@@ -6,7 +6,7 @@
 	let selected = '';
 </script>
 
-<div class="min-w-[4.5rem] bg-gray-50 dark:bg-gray-950 flex gap-2.5 flex-col pt-8">
+<div class="min-w-[4.5rem] bg-[#F2F2F2] dark:bg-gray-950 flex gap-2.5 flex-col pt-8">
 	<div class="flex justify-center relative">
 		{#if selected === 'home'}
 			<div class="absolute top-0 left-0 flex h-full">
@@ -50,9 +50,9 @@
 			}}
 		>
 			<img
-				src="{WEBUI_BASE_URL}/static/favicon.png"
+				src="{WEBUI_BASE_URL}/static/sweco_text_icon.png"
 				class="size-10 {selected === '' ? 'rounded-2xl' : 'rounded-full'}"
-				alt="logo"
+				alt="sweco logo"
 				draggable="false"
 			/>
 		</button>

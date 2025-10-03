@@ -481,6 +481,7 @@
 			location.href = res?.redirect_url ?? '/auth';
 		}
 	};
+	
 
 	onMount(async () => {
 		let touchstartY = 0;

@@ -2,21 +2,24 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/static/favicon.png" crossorigin="use-credentials" />
+
+		<!-- Base favicon (we will swap this dynamically in script) -->
+		<link id="favicon" rel="icon" type="image/png" href="/static/sweco_icon.png" crossorigin="use-credentials" />
+
 		<link
 			rel="icon"
 			type="image/png"
-			href="/static/favicon-96x96.png"
+			href="/static/sweco_icon.png"
 			sizes="96x96"
 			crossorigin="use-credentials"
 		/>
 		<link
 			rel="icon"
 			type="image/svg+xml"
-			href="/static/favicon.svg"
+			href="/static/sweco_icon.png"
 			crossorigin="use-credentials"
 		/>
-		<link rel="shortcut icon" href="/static/favicon.ico" crossorigin="use-credentials" />
+		<link rel="shortcut icon" href="/static/sweco_icon.png" crossorigin="use-credentials" />
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
@@ -27,8 +30,8 @@
 			rel="manifest"
 			href="/manifest.json"
 			crossorigin="use-credentials"
-			crossorigin="use-credentials"
 		/>
+
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
@@ -49,48 +52,52 @@
 			// On page load or when changing themes, best to add inline in `head` to avoid FOUC
 			(() => {
 				const metaThemeColorTag = document.querySelector('meta[name="theme-color"]');
-				const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				const favicon = document.querySelector("#favicon");
+				const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
 
+				function setTheme(theme) {
+					if (theme === 'system') {
+						theme = prefersDarkTheme.matches ? 'dark' : 'light';
+					}
+
+					// Reset classes
+					document.documentElement.classList.remove('dark', 'light', 'her');
+
+					if (theme === 'oled-dark') {
+						document.documentElement.classList.add('dark');
+						metaThemeColorTag.setAttribute('content', '#000000');
+						favicon.href = "/static/sweco_icon-dark.png";
+					} else if (theme === 'light') {
+						document.documentElement.classList.add('light');
+						metaThemeColorTag.setAttribute('content', '#ffffff');
+						favicon.href = "/static/sweco_icon.png";
+					} else if (theme === 'her') {
+						document.documentElement.classList.add('her');
+						metaThemeColorTag.setAttribute('content', '#983724');
+						favicon.href = "/static/sweco_icon.png"; // change if you want a her-specific favicon
+					} else {
+						// dark mode
+						document.documentElement.classList.add('dark');
+						metaThemeColorTag.setAttribute('content', '#171717');
+						favicon.href = "/static/sweco_icon-dark.png";
+					}
+				}
+
+				// Initial load
 				if (!localStorage?.theme) {
 					localStorage.theme = 'system';
 				}
+				setTheme(localStorage.theme);
 
-				if (localStorage.theme === 'system') {
-					document.documentElement.classList.add(prefersDarkTheme ? 'dark' : 'light');
-					metaThemeColorTag.setAttribute('content', prefersDarkTheme ? '#171717' : '#ffffff');
-				} else if (localStorage.theme === 'oled-dark') {
-					document.documentElement.style.setProperty('--color-gray-800', '#101010');
-					document.documentElement.style.setProperty('--color-gray-850', '#050505');
-					document.documentElement.style.setProperty('--color-gray-900', '#000000');
-					document.documentElement.style.setProperty('--color-gray-950', '#000000');
-					document.documentElement.classList.add('dark');
-					metaThemeColorTag.setAttribute('content', '#000000');
-				} else if (localStorage.theme === 'light') {
-					document.documentElement.classList.add('light');
-					metaThemeColorTag.setAttribute('content', '#ffffff');
-				} else if (localStorage.theme === 'her') {
-					document.documentElement.classList.add('her');
-					metaThemeColorTag.setAttribute('content', '#983724');
-				} else {
-					document.documentElement.classList.add('dark');
-					metaThemeColorTag.setAttribute('content', '#171717');
-				}
-
-				window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
-					if (localStorage.theme === 'system') {
-						if (e.matches) {
-							document.documentElement.classList.add('dark');
-							document.documentElement.classList.remove('light');
-							metaThemeColorTag.setAttribute('content', '#171717');
-						} else {
-							document.documentElement.classList.add('light');
-							document.documentElement.classList.remove('dark');
-							metaThemeColorTag.setAttribute('content', '#ffffff');
-						}
+				// React to system theme changes if in system mode
+				prefersDarkTheme.addEventListener("change", (e) => {
+					if (localStorage.theme === "system") {
+						setTheme('system');
 					}
 				});
-				const isDarkMode = document.documentElement.classList.contains('dark');
 
+				// splash screen logo swap
+				const isDarkMode = document.documentElement.classList.contains('dark');
 				const logo = document.createElement('img');
 				logo.id = 'logo';
 				logo.style =
@@ -102,13 +109,12 @@
 					if (document.documentElement.classList.contains('her')) {
 						return;
 					}
-
 					if (splash) splash.prepend(logo);
 				});
 			})();
 		</script>
 
-		<title>Open WebUI</title>
+		<title>Sweco gtp</title>
 
 		%sveltekit.head%
 	</head>
@@ -173,10 +179,6 @@
 					></div>
 				</div>
 			</div>
-
-			<!-- <span style="position: absolute; bottom: 32px; left: 50%; margin: -36px 0 0 -36px">
-				Footer content
-			</span> -->
 		</div>
 	</body>
 </html>
