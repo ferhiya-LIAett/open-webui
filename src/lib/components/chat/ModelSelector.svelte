@@ -8,11 +8,11 @@
 
 	const i18n = getContext('i18n');
 
-	export let selectedModels: string[] = ['']; // start empty
+	export let selectedModels: string[] = []; // start truly empty
 	export let disabled = false;
 	export let showSetDefault = true;
 
-	// Save default model to user settings
+	// Save default model to user settings (optional, can keep for manual save)
 	const saveDefaultModel = async () => {
 		const hasEmpty = selectedModels.some((m) => m === '');
 		if (hasEmpty) {
@@ -25,7 +25,6 @@
 		toast.success('Standardmodell uppdaterad');
 	};
 
-	// Pin or unpin a model
 	const pinModelHandler = async (modelId) => {
 		let pinned = $settings?.pinnedModels ?? [];
 		pinned = pinned.includes(modelId)
@@ -41,6 +40,7 @@
 		model && $models.find((m) => m.id === model) ? model : ''
 	);
 </script>
+
 
 <div class="flex flex-col w-full items-start">
 	{#each selectedModels as selectedModel, idx}
@@ -74,8 +74,4 @@
 	{/each}
 </div>
 
-{#if showSetDefault}
-	<div class="relative text-left mt-[1px] ml-1 text-[0.7rem] text-gray-600 dark:text-gray-400 font-primary">
-		<button on:click={saveDefaultModel}>Sätt som standard</button>
-	</div>
-{/if}
+

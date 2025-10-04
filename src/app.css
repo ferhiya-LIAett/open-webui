@@ -1,6 +1,25 @@
 @reference "./tailwind.css";
 
 @font-face {
+	font-family: 'Sweco Sans';
+	src: url('/assets/fonts/SwecoSans-Regular.otf') format('truetype');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Sweco Sans';
+	src: url('/assets/fonts/SwecoSans-Medium.otf') format('truetype');
+	font-display: swap;
+}
+
+
+@font-face {
+	font-family: 'Sweco Sans';
+	src: url('/assets/fonts/SwecoSans-Bold.otf') format('truetype');
+	font-display: swap;
+}
+
+@font-face {
 	font-family: 'Inter';
 	src: url('/assets/fonts/Inter-Variable.ttf');
 	font-display: swap;
@@ -94,7 +113,7 @@ textarea::placeholder {
 }
 
 .font-primary {
-	font-family: 'Archivo', 'Vazirmatn', sans-serif;
+	font-family: 'Sweco Sans', sans-serif;
 }
 
 .drag-region {
@@ -769,4 +788,30 @@ body {
 .pm-li-drop-outdent {
 	position: relative;
 	z-index: 0;
+}
+
+.app-button {
+  font-family: 'Swecosans', sans-serif;
+  font-size: 1rem; /* var(--app-font-size) */
+  user-select: none;
+  background-color: var(--buttonhover-light);
+  background: none;
+  border: none;
+  margin: 0;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  transition: background-color 0.2s, color 0.2s;
+  color: #000;
+}
+
+.app-button:hover {
+  background-color: var(--buttonhover-light); /* already defined in the theme */
+}
+
+.app-button.active-app {
+  background-color: #E1E1E1; /* darker gray for active */
+  color:black; /* white text for contrast */
 }

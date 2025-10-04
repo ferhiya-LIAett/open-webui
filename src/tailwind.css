@@ -10,6 +10,27 @@
   If we ever want to remove these styles, we need to add an explicit border
   color utility to any element that depends on these defaults.
 */
+@font-face {
+  font-family: 'Sweco Sans';
+  src: url('/assets/fonts/SwecoSans-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweco Sans';
+  src: url('/assets/fonts/SwecoSans-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweco Sans';
+  src: url('/assets/fonts/SwecoSans-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}
+
 @layer base {
 	*,
 	::after,
@@ -24,9 +45,7 @@
 @layer base {
 	html,
 	pre {
-		font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Vazirmatn', ui-sans-serif, system-ui,
-			'Segoe UI', Roboto, Ubuntu, Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial,
-			'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+		font-family:'Sweco Sans', sans-serif;
 	}
 
 	pre {

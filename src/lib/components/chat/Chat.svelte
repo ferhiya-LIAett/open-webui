@@ -2267,6 +2267,7 @@
 		: ' '} w-full max-w-full flex flex-col"
 	id="chat-container"
 >
+
 	{#if !loading}
 		<div in:fade={{ duration: 50 }} class="w-full h-full flex flex-col">
 			{#if $selectedFolder && $selectedFolder?.meta?.background_image_url}
@@ -2291,7 +2292,8 @@
 
 				<div
 					class="absolute top-0 left-0 w-full h-full bg-linear-to-t from-white to-white/85 dark:from-gray-900 dark:to-gray-900/90 z-0"
-				/>
+				
+					/>
 			{/if}
 
 			<PaneGroup direction="horizontal" class="w-full h-full">

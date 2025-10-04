@@ -562,6 +562,16 @@
 		handleVisibilityChange();
 
 		theme.set(localStorage.theme);
+			$: {
+				const favicon = document.getElementById('favicon');
+				if (favicon) {
+					if ($theme === 'dark') {
+						favicon.href = `${WEBUI_BASE_URL}/static/favicon-dark.png`;
+					} else {
+						favicon.href = `${WEBUI_BASE_URL}/static/favicon.png`;
+					}
+				}
+			}
 
 		mobile.set(window.innerWidth < BREAKPOINT);
 
@@ -694,7 +704,15 @@
 
 <svelte:head>
 	<title>{$WEBUI_NAME}</title>
-	<link crossorigin="anonymous" rel="icon" href="{WEBUI_BASE_URL}/static/favicon.png" />
+
+	<!-- Dynamic favicon -->
+	<link
+		rel="icon"
+		id="favicon"
+		href="{$theme === 'dark' 
+			? `${WEBUI_BASE_URL}/static/favicon-dark.png`
+			: `${WEBUI_BASE_URL}/static/favicon.png`}"
+	/>
 
 	<meta name="apple-mobile-web-app-title" content={$WEBUI_NAME} />
 	<meta name="description" content={$WEBUI_NAME} />
@@ -715,17 +733,21 @@
 
 {#if loaded}
 	{#if $isApp}
-		<div class="flex flex-row h-screen">
-			<AppSidebar />
+<div class="flex flex-col h-screen">
+  <Navbar />
+  <div class="flex flex-1 overflow-hidden pt-[64px]">
+    <AppSidebar class="flex-shrink-0 z-40" />
+    <div class="flex-1 overflow-auto bg-[#F2F2F2] dark:bg-gray-950">
+      <slot />
+    </div>
+  </div>
+</div>
 
-			<div class="w-full flex-1 max-w-[calc(100%-4.5rem)]">
-				<slot />
-			</div>
-		</div>
 	{:else}
 		<slot />
 	{/if}
 {/if}
+
 
 <Toaster
 	theme={$theme.includes('dark')

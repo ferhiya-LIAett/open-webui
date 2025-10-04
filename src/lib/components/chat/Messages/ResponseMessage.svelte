@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { theme } from '$lib/stores';
 	import { toast } from 'svelte-sonner';
 	import dayjs from 'dayjs';
 
@@ -611,15 +612,12 @@
 	>
 		<div class={`shrink-0 ltr:mr-3 rtl:ml-3 hidden @lg:flex mt-1 `}>
 			<ProfileImage
-				src={model?.info?.meta?.profile_image_url ??
-					($i18n.language === 'dg-DG'
-						? `${WEBUI_BASE_URL}/doge.png`
-						: `${WEBUI_BASE_URL}/static/favicon.png`)}
-				 className="w-6 h-6 object-cover rounded-none a assistant-message-profile-image"
+				src={($theme === 'dark' || $theme === 'oled-dark')
+					? `${WEBUI_BASE_URL}/static/favicon-dark.png`
+					: `${WEBUI_BASE_URL}/static/favicon.png`}
+				className={'size-8 assistant-message-profile-image rounded-none'}
 			/>
-			
 		</div>
-		
 
 		<div class="flex-auto w-0 pl-1 relative">
 			<Name>

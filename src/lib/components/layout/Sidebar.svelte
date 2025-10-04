@@ -42,6 +42,7 @@
 	} from '$lib/apis/chats';
 	import { createNewFolder, getFolders, updateFolderParentIdById } from '$lib/apis/folders';
 	import { WEBUI_BASE_URL } from '$lib/constants';
+	import { theme } from '$lib/stores';
 
 	import ArchivedChatsModal from './ArchivedChatsModal.svelte';
 	import UserMenu from './Sidebar/UserMenu.svelte';
@@ -527,40 +528,21 @@
 
 {#if $showSidebar}
 	<div
-		bind:this={navElement}
-		id="sidebar"
-		class="h-screen max-h-[100dvh] min-h-screen select-none {$showSidebar
-			? 'bg-gray-50 dark:bg-gray-950 z-50'
-			: ' bg-transparent z-0 '} {$isApp
-			? `ml-[4.5rem] md:ml-0 `
-			: ' transition-all duration-300 '} shrink-0 text-gray-900 dark:text-gray-200 text-sm fixed top-0 left-0 overflow-x-hidden
-        "
-		transition:slide={{ duration: 250, axis: 'x' }}
-		data-state={$showSidebar}
+	bind:this={navElement}
+	id="sidebar"
+	class={`h-[calc(100vh-64px)] max-h-[100dvh] min-h-[calc(100vh-64px)] select-none ${
+		$showSidebar ? 'bg-gray-50 dark:bg-gray-950 z-50' : 'bg-transparent z-0'
+	} ${$isApp ? `ml-[4.5rem] md:ml-0` : 'transition-all duration-300'} shrink-0 text-gray-900 dark:text-gray-200 text-sm fixed top-[64px] left-0 overflow-x-hidden`}
+	transition:slide={{ duration: 250, axis: 'x' }}
+	data-state={$showSidebar}
 	>
+
 		<div
-			class=" my-auto flex flex-col justify-between h-screen max-h-[100dvh] w-[260px] overflow-x-hidden scrollbar-hidden z-50 {$showSidebar
+			class=" bg-[#F2F2F2] my-auto flex flex-col justify-between h-screen max-h-[100dvh] w-[260px] overflow-x-hidden scrollbar-hidden z-50 {$showSidebar
 				? ''
 				: 'invisible'}"
 		>
-			<div
-				class="sidebar px-2 pt-2 pb-1.5 flex justify-between space-x-1 text-gray-600 dark:text-gray-400 sticky top-0 z-10 -mb-3"
-			>
-					<!-- Keep only the logo -->
-					<a
-					class="flex items-center justify-center rounded-xl hover:bg-gray-100/50 dark:hover:bg-gray-850/50 transition no-drag-region"
-					href="/"
-					draggable="false"
-					on:click={newChatHandler}
-					>
-					<img
-						crossorigin="anonymous"
-						src="{WEBUI_BASE_URL}/static/sweco_text_icon.png"
-						alt=""
-					/>
-				</a>
-
-			</div>
+	
 
 			<div
 				class="relative flex flex-col flex-1 overflow-y-auto scrollbar-hidden pt-3 pb-3"
