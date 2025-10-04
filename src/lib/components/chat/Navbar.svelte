@@ -110,8 +110,7 @@
 			on:click={() => switchPage('assistant')}
 		>
 			Assistant
-		</button>
-	  
+		</button> 
     </div>
 
     <!-- Right: Controls -->
