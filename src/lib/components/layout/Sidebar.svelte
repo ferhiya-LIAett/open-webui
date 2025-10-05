@@ -529,16 +529,19 @@
 {#if $showSidebar}
 	<div
 	bind:this={navElement}
-	id="sidebar"
-	class={`h-[calc(100vh-64px)] max-h-[100dvh] min-h-[calc(100vh-64px)] select-none ${
-		$showSidebar ? 'bg-gray-50 dark:bg-gray-950 z-50' : 'bg-transparent z-0'
-	} ${$isApp ? `ml-[4.5rem] md:ml-0` : 'transition-all duration-300'} shrink-0 text-gray-900 dark:text-gray-200 text-sm fixed top-[64px] left-0 overflow-x-hidden`}
-	transition:slide={{ duration: 250, axis: 'x' }}
-	data-state={$showSidebar}
-	>
-
+  id="sidebar"
+  class={`h-[calc(100vh-64px)] max-h-[100dvh] min-h-[calc(100vh-64px)]
+    w-full max-w-[280px]
+    select-none
+    ${$showSidebar ? 'bg-white dark:bg-black z-50' : 'bg-transparent z-0'}
+    ${$isApp ? 'ml-[4.5rem] md:ml-0' : 'transition-all duration-300'}
+    shrink-0 text-black dark:text-white text-sm fixed top-[64px] left-0
+  `}
+  transition:slide={{ duration: 250, axis: 'x' }}
+  data-state={$showSidebar}
+>
 		<div
-			class=" bg-[#F2F2F2] my-auto flex flex-col justify-between h-screen max-h-[100dvh] w-[260px] overflow-x-hidden scrollbar-hidden z-50 {$showSidebar
+			class="flex flex-col justify-between h-full w-full bg-transparent dark:bg-black p-2 {$showSidebar
 				? ''
 				: 'invisible'}"
 		>

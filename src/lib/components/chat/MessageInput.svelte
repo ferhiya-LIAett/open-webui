@@ -7,7 +7,7 @@
 	import { v4 as uuidv4 } from 'uuid';
 	import { createPicker, getAuthToken } from '$lib/utils/google-drive-picker';
 	import { pickAndDownloadFile } from '$lib/utils/onedrive-file-picker';
-
+	import { theme } from '$lib/stores';
 	import { onMount, tick, getContext, createEventDispatcher, onDestroy } from 'svelte';
 	const dispatch = createEventDispatcher();
 
@@ -1047,12 +1047,18 @@
 						>
 							<div
 								id="message-input-container"
-								class={`flex-1 flex flex-col relative w-full p-[1em_1em_0.5em_1em] rounded-[25px] transition
-								${$temporaryChatEnabled
-									? 'border-dashed border-gray-100 dark:border-gray-800 hover:border-gray-200 focus-within:border-gray-200 hover:dark:border-gray-700 focus-within:dark:border-gray-700'
-									: 'border border-gray-100 dark:border-gray-850 hover:border-gray-200 focus-within:border-gray-100 hover:dark:border-gray-800 focus-within:dark:border-gray-800'}
-								bg-[#F2F2F2] dark:bg-gray-700`}
-							dir={$settings?.chatDirection ?? 'auto'}
+								class={`flex-1 flex flex-col relative w-full
+									max-w-[calc(100% - 320px)]  /* Leave space for sidebar (~300px) + margin */
+									p-3 md:p-4 rounded-2xl transition
+									${$temporaryChatEnabled
+										? 'border-dashed border-gray-100 dark:border-gray-800 hover:border-gray-200 focus-within:border-gray-200 hover:dark:border-gray-700 focus-within:dark:border-gray-700'
+										: 'border border-gray-100 dark:border-gray-850 hover:border-gray-200 focus-within:border-gray-100 hover:dark:border-gray-800 focus-within:dark:border-gray-800'}
+									bg-[#F2F2F2] dark:bg-gray-700
+									text-black dark:text-white
+								`}
+								dir={$settings?.chatDirection ?? 'auto'}
+								style="min-width: 200px;"
+							
 								
 							>
 								{#if atSelectedModel !== undefined}
@@ -1193,6 +1199,7 @@
 													<RichTextInput
 														bind:this={chatInputElement}
 														id="chat-input"
+														
 														onChange={(e) => {
 															prompt = e.md;
 															command = getCommand();

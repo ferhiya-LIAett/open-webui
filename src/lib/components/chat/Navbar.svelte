@@ -71,7 +71,7 @@
 	aria-label="New Chat"
 />
 
-<nav class="fixed top-0 left-0 right-0 h-[64px] z-50 flex items-center bg-[#F2F2F2] dark:bg-gray-950">
+<nav class="fixed top-0 left-0 right-0 h-[64px] z-50 flex items-center bg-[#F2F2F2] dark:bg-black">
   <div class="flex items-center w-full h-full px-4">
     <!-- Left: Logo + Links -->
     <div class="flex items-center h-full gap-5">
@@ -88,29 +88,29 @@
 		/>
 		</div>
 
+<button
+  id="swecogpt-button"
+  class="app-button active-app !text-black dark:!text-white dark:!bg-gray-600/40"
+  on:click={() => switchPage('swecogpt')}
+>
+  SwecoGPT
+</button>
 
-		<button
-			id="swecogpt-button"
-			class="app-button active-app"
-			on:click={() => switchPage('swecogpt')}
-		>
-			SwecoGPT
-		</button>
-		<button
-			id="swecogpt-plus-button"
-			class="app-button"
-			on:click={() => switchPage('swecogpt-plus')}
-		>
-			SwecoGPT Plus
-		</button>
+<button
+  id="swecogpt-plus-button"
+  class="app-button !text-black dark:!text-white dark:!bg-gray-600/40"
+  on:click={() => switchPage('swecogpt-plus')}
+>
+  SwecoGPT Plus
+</button>
 
-		<button
-			id="assistant-button"
-			class="app-button"
-			on:click={() => switchPage('assistant')}
-		>
-			Assistant
-		</button> 
+<button
+  id="assistant-button"
+  class="app-button !text-black dark:!text-white dark:!bg-gray-600/40"
+  on:click={() => switchPage('assistant')}
+>
+  Assistant
+</button>
     </div>
 
     <!-- Right: Controls -->
@@ -169,9 +169,19 @@
 </nav>
 
 <!-- Sidebar toggle buttons and selectmodel -->
-<div style="font-weight: bold; padding: 2%; padding-top: 4rem; z-index: 50;">
-	
-  <div class="-translate-x-0.5 mr-1 mt-1 self-start flex flex-none items-center text-gray-600 dark:text-gray-400 z-50 relative gap-4">
+ <!-- Sidebar toggle buttons and selectmodel -->
+<div
+  style="font-weight: bold; z-index: 50; padding-top: 4rem;"
+  class="transition-all duration-300 ease-in-out"
+  
+  class:p-3={!$showSidebar} 
+  class:p-[3%]={$showSidebar}
+  class:pt-[4rem]={$showSidebar}
+  class:pt-6={!$showSidebar}
+>
+  <div
+    class="-translate-x-0.5 mr-1 mt-1 self-start flex flex-none items-center text-gray-600 dark:text-gray-400 z-50 relative gap-4 transition-all duration-300"
+  >
     <Tooltip content={$showSidebar ? $i18n.t('Close Sidebar') : $i18n.t('Open Sidebar')}>
       <button
         id="toggle-navbar-button"
@@ -185,8 +195,8 @@
           style="
             --fa-primary-color: {$theme === 'dark' || $theme === 'oled-dark' ? 'white' : 'black'};
             --fa-secondary-color: gray;
-            font-size: 16px; /* adjusts height roughly */
-            width: 14px;    /* sets width */
+            font-size: 16px;
+            width: 14px;
             height: 16px;
             line-height: 16px;
           "
