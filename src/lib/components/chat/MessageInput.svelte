@@ -1048,16 +1048,17 @@
 							<div
 								id="message-input-container"
 								class={`flex-1 flex flex-col relative w-full
-									max-w-[calc(100% - 320px)]  /* Leave space for sidebar (~300px) + margin */
+									 
 									p-3 md:p-4 rounded-2xl transition
 									${$temporaryChatEnabled
 										? 'border-dashed border-gray-100 dark:border-gray-800 hover:border-gray-200 focus-within:border-gray-200 hover:dark:border-gray-700 focus-within:dark:border-gray-700'
 										: 'border border-gray-100 dark:border-gray-850 hover:border-gray-200 focus-within:border-gray-100 hover:dark:border-gray-800 focus-within:dark:border-gray-800'}
 									bg-[#F2F2F2] dark:bg-gray-700
 									text-black dark:text-white
+									
 								`}
 								dir={$settings?.chatDirection ?? 'auto'}
-								style="min-width: 200px;"
+								
 							
 								
 							>

@@ -531,9 +531,9 @@
 	bind:this={navElement}
   id="sidebar"
   class={`h-[calc(100vh-64px)] max-h-[100dvh] min-h-[calc(100vh-64px)]
-    w-full max-w-[280px]
+    w-full max-w-[280px] 
     select-none
-    ${$showSidebar ? 'bg-white dark:bg-black z-50' : 'bg-transparent z-0'}
+    ${$showSidebar ? 'bg-[#F2F2F2] dark:bg-black z-50' : 'bg-transparent z-0'}
     ${$isApp ? 'ml-[4.5rem] md:ml-0' : 'transition-all duration-300'}
     shrink-0 text-black dark:text-white text-sm fixed top-[64px] left-0
   `}
@@ -986,6 +986,7 @@
 								}
 							}}
 						>
+						<hr>
 							<div
 								class=" flex items-center rounded-2xl py-2 px-1.5 w-full hover:bg-gray-100/50 dark:hover:bg-gray-900/50 transition"
 							>

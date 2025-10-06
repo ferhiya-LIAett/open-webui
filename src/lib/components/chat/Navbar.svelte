@@ -73,7 +73,7 @@
 
 <nav class="fixed top-0 left-0 right-0 h-[64px] z-50 flex items-center bg-[#F2F2F2] dark:bg-black">
   <div class="flex items-center w-full h-full px-4">
-    <!-- Left: Logo + Links -->
+
     <div class="flex items-center h-full gap-5">
 		<div
 		class="flex items-center justify-center w-[100px] h-[50px]"
@@ -167,46 +167,3 @@
     </div>
   </div>
 </nav>
-
-<!-- Sidebar toggle buttons and selectmodel -->
- <!-- Sidebar toggle buttons and selectmodel -->
-<div
-  style="font-weight: bold; z-index: 50; padding-top: 4rem;"
-  class="transition-all duration-300 ease-in-out"
-  
-  class:p-3={!$showSidebar} 
-  class:p-[3%]={$showSidebar}
-  class:pt-[4rem]={$showSidebar}
-  class:pt-6={!$showSidebar}
->
-  <div
-    class="-translate-x-0.5 mr-1 mt-1 self-start flex flex-none items-center text-gray-600 dark:text-gray-400 z-50 relative gap-4 transition-all duration-300"
-  >
-    <Tooltip content={$showSidebar ? $i18n.t('Close Sidebar') : $i18n.t('Open Sidebar')}>
-      <button
-        id="toggle-navbar-button"
-        on:click={() => showSidebar.set(!$showSidebar)}
-        class="transition duration-300 p-0"
-        aria-label={$showSidebar ? $i18n.t('Close Sidebar') : $i18n.t('Open Sidebar')}
-      >
-        <i
-          class="fad fa-chevron-double-right navbar-rotate transition duration-300"
-          class:rotate-180={$showSidebar}
-          style="
-            --fa-primary-color: {$theme === 'dark' || $theme === 'oled-dark' ? 'white' : 'black'};
-            --fa-secondary-color: gray;
-            font-size: 16px;
-            width: 14px;
-            height: 16px;
-            line-height: 16px;
-          "
-        ></i>
-      </button>
-    </Tooltip>
-
-    <!-- Model Selector -->
-    {#if showModelSelector}
-      <ModelSelector bind:selectedModels showSetDefault={!shareEnabled} />
-    {/if}
-  </div>
-</div>

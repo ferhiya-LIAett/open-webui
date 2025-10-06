@@ -12,7 +12,9 @@
 	import { get, type Unsubscriber, type Writable } from 'svelte/store';
 	import type { i18n as i18nType } from 'i18next';
 	import { WEBUI_BASE_URL } from '$lib/constants';
-
+    import { theme } from '$lib/stores';
+	import ModelSelector from '../chat/ModelSelector.svelte';
+	
 	import {
 		chatId,
 		chats,
@@ -93,6 +95,8 @@
 	import Image from '../common/Image.svelte';
 
 	export let chatIdProp = '';
+    export let showModelSelector = true;
+	export let shareEnabled: boolean = false;
 
 	let loading = true;
 
@@ -2261,12 +2265,56 @@
 	}}
 />
 
+
 <div
 	class="h-screen max-h-[100dvh] transition-width duration-200 ease-in-out {$showSidebar
 		? '  md:max-w-[calc(100%-260px)]'
 		: ' '} w-full max-w-full flex flex-col"
 	id="chat-container"
 >
+
+<!-- Sidebar toggle buttons and selectmodel -->
+
+<div
+  style="font-weight: bold; padding-top: 4rem;"
+  class="transition-all duration-300 ease-in-out"
+  
+  class:p-3={!$showSidebar} 
+  class:p-[3%]={$showSidebar}
+  class:pt-[4rem]={$showSidebar}
+  class:pt-6={!$showSidebar}
+>
+  <div
+    class="-translate-x-0.5 mr-1 mt-1 self-start flex flex-none items-center text-gray-600 dark:text-gray-400 z-50 relative gap-4 transition-all duration-300"
+  >
+    <Tooltip content={$showSidebar ? $i18n.t('Close Sidebar') : $i18n.t('Open Sidebar')}>
+      <button
+        id="toggle-navbar-button"
+        on:click={() => showSidebar.set(!$showSidebar)}
+        class="transition duration-300 p-0"
+        aria-label={$showSidebar ? $i18n.t('Close Sidebar') : $i18n.t('Open Sidebar')}
+      >
+        <i
+          class="fad fa-chevron-double-right navbar-rotate transition duration-300"
+          class:rotate-180={$showSidebar}
+          style="
+            --fa-primary-color: {$theme === 'dark' || $theme === 'oled-dark' ? 'white' : 'black'};
+            --fa-secondary-color: gray;
+            font-size: 16px;
+            width: 14px;
+            height: 16px;
+            line-height: 16px;
+          "
+        ></i>
+      </button>
+    </Tooltip>
+
+    <!-- Model Selector -->
+    {#if showModelSelector}
+      <ModelSelector bind:selectedModels showSetDefault={!shareEnabled} />
+    {/if}
+  </div>
+</div>
 
 	{#if !loading}
 		<div in:fade={{ duration: 50 }} class="w-full h-full flex flex-col">

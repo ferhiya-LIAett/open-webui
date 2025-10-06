@@ -561,18 +561,7 @@
 		// Call visibility change handler initially to set state on load
 		handleVisibilityChange();
 
-		theme.set(localStorage.theme);
-			$: {
-				const favicon = document.getElementById('favicon');
-				if (favicon) {
-					if ($theme === 'dark') {
-						favicon.href = `${WEBUI_BASE_URL}/static/favicon-dark.png`;
-					} else {
-						favicon.href = `${WEBUI_BASE_URL}/static/favicon.png`;
-					}
-				}
-			}
-
+	
 		mobile.set(window.innerWidth < BREAKPOINT);
 
 		const onResize = () => {
@@ -706,13 +695,12 @@
 	<title>{$WEBUI_NAME}</title>
 
 	<!-- Dynamic favicon -->
-	<link
-		rel="icon"
-		id="favicon"
-		href="{$theme === 'dark' 
-			? `${WEBUI_BASE_URL}/static/favicon-dark.png`
-			: `${WEBUI_BASE_URL}/static/favicon.png`}"
-	/>
+ <link
+    rel="icon"
+    href={($theme === 'dark' || $theme === 'oled-dark') 
+      ? `${WEBUI_BASE_URL}/static/favicon-dark.png` 
+      : `${WEBUI_BASE_URL}/static/favicon.png`}
+  />
 
 	<meta name="apple-mobile-web-app-title" content={$WEBUI_NAME} />
 	<meta name="description" content={$WEBUI_NAME} />
